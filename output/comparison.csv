@@ -1,0 +1,13 @@
+sample_id,column,regex,ai,raw_value,raw_unit
+S0006,glucose_mg_dl,141.2,2541.6,141.2,mmol/L
+S0011,glucose_mg_dl,99.7,1794.6,99.7,mmol/L
+S0014,glucose_mg_dl,133.8,2408.4,133.8,mmol/L
+S0015,glucose_mg_dl,150.8,2714.4,150.8,mmol/L
+S0016,glucose_mg_dl,112.5,2025.0,112.5,mmol/L
+S0017,glucose_mg_dl,249.2,4485.6,249.2,mmol/L
+S0024,glucose_mg_dl,169.5,3051.0,169.5,mmol/L
+S0033,glucose_mg_dl,105.0,1890.0,105.0,mmol/L
+S0035,glucose_mg_dl,225.1,4051.8,225.1,mmol/L
+S0038,glucose_mg_dl,157.4,2833.2,157.4,mmol/L
+S0039,glucose_mg_dl,74.9,1348.2,74.9,mmol/L
+S0046,glucose_mg_dl,128.5,2313.0,128.5,mmol/L
