@@ -3,9 +3,11 @@
 - Chat GPT 5 in a fresh chat with no prior context: Task 2 AI cleaning
 
 
-## Chat GPT was used to check the csv to see how it would clean it and the prompt given was 
+## Task 2: AI cleaning (ChatGPT, output/ai_clean.csv)
+ChatGPT was used to clean the same CSV so I could compare it to the regex script. The prompt given was:
 
-``` Clean this messy clinical dataset. Return ONLY a CSV with no explanation, using exactly these columns:
+```
+Clean this messy clinical dataset. Return ONLY a CSV with no explanation, using exactly these columns:
 sample_id,patient_name,dob,dob_flag,sex,site,glucose_mg_dl,glucose_flag,notes
 
 Rules:
@@ -18,12 +20,12 @@ Rules:
 - dob_flag and glucose_flag: note anything you changed, guessed, or couldn't resolve
 - notes: keep as-is
 
-Data: pasted 
+Data:
+<full contents of data/raw/messy_samples.csv pasted here>
+```
 
-``` 
-
-
-
+Off-target result: ChatGPT multiplied all 12 "mmol/L" values by 18 (e.g. S0039 74.9 -> 1348.2 mg/dL)
+without flagging them as impossible. I rejected that and kept the regex rule instead (see WRITEUP.md).
 
 ## Task 1: Regex script (clean_regex.py)
 - Claude drafted clean_regex.py and explained what each regex does.
@@ -35,6 +37,10 @@ Data: pasted
 
 ## Comparison (compare.py)
 - Claude drafted compare.py. I ran it and used its output (output/comparison.csv) for the write-up.
+
+## Write-up (WRITEUP.md)
+- Claude (Claude Code) checked the repo against the Lab 3 rubric, re-ran both scripts to confirm the
+  outputs reproduce, and drafted WRITEUP.md from my NOTES.md findings and the comparison output.
 
 ## What I checked myself
 - Ran both scripts and confirmed the output (60 rows, 48/60 glucose agreement)

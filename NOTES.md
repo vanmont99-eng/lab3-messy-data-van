@@ -22,7 +22,7 @@ unit label is almost definitely wrong, not the number.
 ## Decision
 - If unit is mmol/L and value is under 50, convert to mg/dL (x18)
 - If unit is mmol/L and value is over 50, don't convert. Keep the value as mg/dL
-  and set unit_flag = "label likely wrong"
+  and set glucose_flag = "labeled mmol/L but only plausible as mg/dL, not converted"
 - Blindly multiplying by 18 would give values like 2541.6 mg/dL for S0006, which
   is not physically possible
 
@@ -33,10 +33,10 @@ current year, subtract 100.
 
 # Failure Modes of the AI - 2 records 
 
-## Failure mode 1: Converted impossible faules
+## Failure mode 1: Converted impossible values
 
 S0039, raw 74.9 mmol/L. The AI output 1348.2 mg/dL, and regex kept 74.9 with a flag.
-- Did the textbook conversion but never asked whether it made since or not, as 74.8 mmol/L is an impossible glucose level and did not flag it and still did the conversion. I wrote a rule for regex to flag those ones. 
+- Did the textbook conversion but never asked whether it made sense or not, as 74.9 mmol/L is an impossible glucose level and did not flag it and still did the conversion. I wrote a rule for regex to flag those ones. 
 
 ## Failure Mode 2: Both
 
@@ -46,6 +46,6 @@ Both approaches read these as month first (Feb 9, July 9). But either could just
 Why it matters: 60/60 agreement looks like proof both are right. It isn't. They made the same assumption, so they agree. Agreement between two methods only tells you something when they fail independently.
 Honest caveat: the generator script does use month first, so both are correct here. But you only know that because you can read the generator. With real data, you'd have no way to tell from the file alone.
 
-## Faulure Mode 3 Unknown" erases information (both did it)
+## Failure Mode 3: "Unknown" erases information (both did it)
 Raw sex values: U (9), unknown (6), and blank (4). Both approaches collapsed all 19 into Unknown.
 Why it matters: U means someone recorded that it's unknown. Blank might mean nobody entered anything. Those aren't the same missingness, and after cleaning you can't tell them apart anymore.
