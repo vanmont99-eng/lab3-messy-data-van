@@ -30,3 +30,22 @@ unit label is almost definitely wrong, not the number.
 Python's %y reads 00-68 as 2000s and 69-99 as 1900s. So 11.24.53 -> 2053, which is
 in the future and can't be a birthday. Rule: if the parsed year is after the
 current year, subtract 100.
+
+# Failure Modes of the AI - 2 records 
+
+## Failure mode 1: Converted impossible faules
+
+S0039, raw 74.9 mmol/L. The AI output 1348.2 mg/dL, and regex kept 74.9 with a flag.
+- Did the textbook conversion but never asked whether it made since or not, as 74.8 mmol/L is an impossible glucose level and did not flag it and still did the conversion. I wrote a rule for regex to flag those ones. 
+
+## Failure Mode 2: Both
+
+Records: S0060 02.09.06 and S0001 07/09/1962
+Both approaches read these as month first (Feb 9, July 9). But either could just as easily be day first (Sept 2, Sept 7). European and a lot of international records use day first.
+12 of 60 DOBs (20%) have both numbers ≤12, so they're ambiguous in the same way: S0001, S0010, S0015, S0016, S0031, S0034, S0037, S0039, S0044, S0052, S0058, S0060.
+Why it matters: 60/60 agreement looks like proof both are right. It isn't. They made the same assumption, so they agree. Agreement between two methods only tells you something when they fail independently.
+Honest caveat: the generator script does use month first, so both are correct here. But you only know that because you can read the generator. With real data, you'd have no way to tell from the file alone.
+
+## Faulure Mode 3 Unknown" erases information (both did it)
+Raw sex values: U (9), unknown (6), and blank (4). Both approaches collapsed all 19 into Unknown.
+Why it matters: U means someone recorded that it's unknown. Blank might mean nobody entered anything. Those aren't the same missingness, and after cleaning you can't tell them apart anymore.
