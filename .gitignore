@@ -1,0 +1,16 @@
+
+data/raw/*
+!data/raw/*.csv
+data/processed/*
+!data/**/.gitkeep
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+
+# VS Code
+.vscode/
+
+# macOS
+.DS_Store
