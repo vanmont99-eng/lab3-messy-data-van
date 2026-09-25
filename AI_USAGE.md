@@ -34,7 +34,7 @@ without flagging them as impossible. I rejected that and kept the regex rule ins
   - mmol/L values over 50 are flagged, not converted, because they aren't physiologically possible
   - 2-digit years that land in the future get 100 subtracted (11.24.53 -> 1953)
 - Claude also drafted environment.yml and the pandas one-liners I used to inspect the data.
-
+- Claude helped draft the clean_fasta_regex.py
 ## Comparison (compare.py)
 - Claude drafted compare.py. I ran it and used its output (output/comparison.csv) for the write-up.
 
