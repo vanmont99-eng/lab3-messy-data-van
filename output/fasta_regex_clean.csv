@@ -1,0 +1,9 @@
+sample_id,organism,gene,gene_flag,declared_length,actual_length,length_flag,note,raw_header
+sample_001,Homo sapiens,BRCA1,,120,120,,,>sample_001|organism=Homo_sapiens|gene=BRCA1|len=120
+sample_002,Homo sapiens,TP53,,,134,no declared length,,>Sample002 organism:Homo sapiens gene:TP53
+sample_003,Homo sapiens,EGFR,"gene not labeled, matched by name",150,157,"header says 150, sequence is 157",,>sample-003 | Homo_sapiens | EGFR | length=150bp
+sample_004,Homo sapiens,BRCA1,,,104,no declared length,,>SAMPLE_004;species=H.sapiens;target=BRCA1
+sample_005,Homo sapiens,TP53,"gene not labeled, matched by name",130,144,"header says 130, sequence is 144",,>sample005 Homo sapiens; TP53; 130 bp
+sample_006,Homo sapiens,EGFR,"gene not labeled, matched by name",,125,no declared length,,>seq6|Hsapiens|EGFR
+sample_007,Homo sapiens,BRCA1,,,135,no declared length,re-sequenced,>Sample_007 organism=Homo_sapiens|gene=BRCA1|note:re-sequenced
+sample_008,Homo sapiens,TP53,,,123,no declared length,,>sample-8 species:Homo_sapiens gene:TP53 len:NA
