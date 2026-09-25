@@ -1,0 +1,8 @@
+sample_id,column,regex,ai
+sample_003,gene_flag,"gene not labeled, matched by name",(blank)
+sample_005,gene_flag,"gene not labeled, matched by name",(blank)
+sample_006,gene_flag,"gene not labeled, matched by name",(blank)
+sample_002,length_flag,no declared length,(blank)
+sample_004,length_flag,no declared length,(blank)
+sample_006,length_flag,no declared length,(blank)
+sample_007,length_flag,no declared length,(blank)

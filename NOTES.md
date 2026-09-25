@@ -72,3 +72,24 @@ The sequence is the real data, the header is something someone typed. So actual 
 - Keep both declared_length and actual_length columns, add length_flag when they
   don't match or when there's no declared length
 - len:NA -> declared_length is missing, not the text "NA"
+
+## FASTA comparison + failure modes
+Values matched 8/8 on everything (organism, gene, declared length, actual length, note).
+All the disagreements were in the flags.
+
+1. Header length is wrong (both caught it): sample_003 says 150bp but the sequence is 157,
+   sample005 says 130 bp but it's 144. Anyone who trusted the header would have the wrong
+   length. Same idea as the mmol/L labels in the CSV, the metadata is wrong and the actual
+   data is right. The AI got every actual length right [CHECK: did it run code to count?].
+
+2. AI didn't flag its guesses: 003, 005, and seq6 have no gene label, the gene name is just
+   sitting there. The AI got all 3 right but left gene_flag blank, so you can't tell which
+   genes it read from a label and which it inferred. Regex flagged all 3.
+
+3. My regex lumped two kinds of missing together: sample-8 says len:NA (someone recorded
+   that it's unknown) but 002, 004, seq6, and 007 just never had a length. Regex called all 5
+   "no declared length." The AI only flagged sample 8. Same problem as U vs blank for sex
+   in the CSV, except this time my script is the one that lost the info.
+
+4. Regex limit: the gene fallback only works because BRCA1, TP53, and EGFR are hardcoded.
+   An unlabeled KRAS would come back "gene not found." Regex only knows what I tell it.
