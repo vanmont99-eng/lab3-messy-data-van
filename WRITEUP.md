@@ -67,3 +67,44 @@ The regex, used together with a human check. It's reproducible, auditable, and i
 for spotting format variants, but its output needs a range check before anyone uses it. Its most serious error here looked
 exactly like a correct value. In both cases the domain knowledge (what glucose values are possible) came from
 me, not from either tool.
+
+# Extra credit (graduate addendum)
+
+## FASTA: regex vs AI
+I parsed the headers of messy_sequences.fasta with clean_fasta_regex.py and gave the same
+file to the AI in a fresh chat. compare_fasta.py shows they matched 8/8 on every value
+(sample ID, organism, gene, declared length, actual length, note). All the disagreements
+were in the flags.
+
+The biggest problem in this file is that the header lengths are wrong. sample-003 says
+150bp but the sequence is 157, and sample005 says 130 bp but it's 144. Both methods caught
+this because both counted the actual sequence instead of trusting the header. It's the
+same lesson as the mmol/L labels in the CSV. The metadata someone typed is wrong and the
+actual data is right.
+
+Where they differed:
+- **The AI didn't flag its guesses.** 003, 005, and seq6 have no gene label, just the gene
+  name sitting in the header. The AI got all 3 right but left gene_flag blank, so there's
+  no way to tell which genes it read from a label and which it inferred. My regex flagged
+  all 3.
+- **My regex lost information the AI kept.** sample-8 says len:NA, meaning someone recorded
+  that the length was unknown. 002, 004, seq6, and 007 just never had a length field. My
+  regex called all 5 "no declared length." The AI only flagged sample 8. It's the same thing
+  that happened with U vs blank for sex in the CSV, except this time my script is the one
+  that erased the difference.
+- **Regex only knows what I tell it.** The gene fallback works because BRCA1, TP53, and
+  EGFR are hardcoded. An unlabeled KRAS would come back as "gene not found."
+
+## Samples x features x metadata table
+build_feature_table.py turns regex_clean.csv into output/feature_table.csv, with one row
+per sample. Features are age_years (calculated as of 2026-01-01 so it's reproducible) and
+glucose_mg_dl. Metadata is sex, site, notes, and True/False quality flags joined on
+sample_id.
+
+**Analytic readiness:** The types are consistent now and the 2 missing glucose values are
+marked in glucose_missing instead of dropped, but this table isn't ready for modeling. 12
+glucose values (glucose_unit_suspect) have a unit nobody can confirm, 5 samples say
+"re-draw requested" so their glucose values might not be valid either, and 14 ages depend on
+a guessed century, with 12 DOBs that could be day/month swapped. Sex is also "Unknown" for
+19 of 60 samples, and that mixes "recorded as unknown" with "never recorded," so it
+can't be treated as one category without going back to the source.
