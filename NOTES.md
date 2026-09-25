@@ -49,3 +49,26 @@ Honest caveat: the generator script does use month first, so both are correct he
 ## Failure Mode 3: "Unknown" erases information (both did it)
 Raw sex values: U (9), unknown (6), and blank (4). Both approaches collapsed all 19 into Unknown.
 Why it matters: U means someone recorded that it's unknown. Blank might mean nobody entered anything. Those aren't the same missingness, and after cleaning you can't tell them apart anymore.
+# FASTA inventory (messy_sequences.fasta)
+
+## What's messy
+- sample_id: sample_001, Sample002, sample-003, SAMPLE_004, sample005, seq6, Sample_007, sample-8
+  -> standardize to sample_001 ... sample_008. seq6 doesn't say "sample" so match on the number.
+- separators: | or space or ; or mixed (" | ", space + |)
+- organism: Homo_sapiens, Homo sapiens, H.sapiens, Hsapiens -> Homo sapiens
+- gene: gene=, gene:, target=, or no label at all (003, 005, seq6)
+  -> match the gene name itself (BRCA1, TP53, EGFR) instead of the label
+- length: len=120, length=150bp, 130 bp, len:NA, or missing (002, 004, seq6, 007)
+- note: only sample 7 has one (note:re-sequenced)
+
+## Length problem
+Declared length in the header doesn't always match the actual sequence:
+- sample-003 says 150bp, actual 157
+- sample005 says 130 bp, actual 144
+- sample_001 says 120, actual 120 (matches)
+The sequence is the real data, the header is something someone typed. So actual length wins.
+
+## Decisions
+- Keep both declared_length and actual_length columns, add length_flag when they
+  don't match or when there's no declared length
+- len:NA -> declared_length is missing, not the text "NA"
