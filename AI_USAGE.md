@@ -47,3 +47,31 @@ without flagging them as impossible. I rejected that and kept the regex rule ins
 - Checked the mmol/L values against normal glucose ranges from my clinical work
 - Confirmed the AI output had all 60 rows and no dropped samples
 
+
+## Extra credit: FASTA AI cleaning
+- Model: same as Task 2, in a fresh chat with no prior context
+- Didn't warn it about the header lengths being wrong, to see if it caught that on its own
+- Prompt (verbatim), followed by the full contents of messy_sequences.fasta:
+
+    Parse the headers of this messy FASTA file into a clean table. Return ONLY a CSV with no explanation, using exactly these columns:
+    sample_id,organism,gene,gene_flag,declared_length,actual_length,length_flag,note
+
+    Rules:
+    - sample_id: format sample_001
+    - organism: standardized species name
+    - gene: gene symbol
+    - declared_length: the length stated in the header, if any (number only)
+    - actual_length: the actual length of the sequence
+    - gene_flag and length_flag: note anything you changed, guessed, or couldn't resolve
+    - note: any extra note in the header, otherwise blank
+
+    Data:
+    [contents of messy_sequences.fasta]
+
+- Output saved as output/fasta_ai_clean.csv (8 records, no re-prompts)
+
+## Extra credit scripts and write-up
+- Claude drafted clean_fasta_regex.py, compare_fasta.py, and build_feature_table.py.
+  I ran all three and checked the output against the raw FASTA and my cleaned CSV.
+- Claude drafted the extra credit sections of WRITEUP.md and README.md from my notes.
+  I read through and edited them.

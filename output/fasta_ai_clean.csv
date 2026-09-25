@@ -1,0 +1,9 @@
+sample_id,organism,gene,gene_flag,declared_length,actual_length,length_flag,note
+sample_001,Homo sapiens,BRCA1,,120,120,,
+sample_002,Homo sapiens,TP53,,,134,,
+sample_003,Homo sapiens,EGFR,,150,157,declared length does not match actual length,
+sample_004,Homo sapiens,BRCA1,,,104,,
+sample_005,Homo sapiens,TP53,,130,144,declared length does not match actual length,
+sample_006,Homo sapiens,EGFR,,,125,,
+sample_007,Homo sapiens,BRCA1,,,135,,re-sequenced
+sample_008,Homo sapiens,TP53,,,123,declared length unavailable,

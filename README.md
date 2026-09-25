@@ -37,3 +37,16 @@ sample_id, patient_name, dob (YYYY-MM-DD), dob_flag, sex (M/F/Unknown),
 site (A/B/C), glucose_mg_dl, glucose_flag, notes
 
 The flag columns record every guess or judgment call the script made.
+
+## Extra credit (graduate addendum)
+```
+python clean_fasta_regex.py      # data/raw/messy_sequences.fasta -> output/fasta_regex_clean.csv
+python compare_fasta.py          # regex vs AI -> output/fasta_comparison.csv
+python build_feature_table.py    # output/regex_clean.csv -> output/feature_table.csv
+```
+- `clean_fasta_regex.py` regex parser for the FASTA headers
+- `output/fasta_regex_clean.csv` FASTA regex output
+- `output/fasta_ai_clean.csv` FASTA AI output (prompt in AI_USAGE.md)
+- `compare_fasta.py` / `output/fasta_comparison.csv` FASTA comparison
+- `build_feature_table.py` / `output/feature_table.csv` samples x features x metadata table
+- Write-up for all of this is at the bottom of WRITEUP.md
