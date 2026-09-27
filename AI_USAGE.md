@@ -73,5 +73,3 @@ without flagging them as impossible. I rejected that and kept the regex rule ins
 ## Extra credit scripts and write-up
 - Claude drafted clean_fasta_regex.py, compare_fasta.py, and build_feature_table.py.
   I ran all three and checked the output against the raw FASTA and my cleaned CSV.
-- Claude drafted the extra credit sections of WRITEUP.md and README.md from my notes.
-  I read through and edited them.
