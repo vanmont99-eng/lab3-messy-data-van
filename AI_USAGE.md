@@ -36,16 +36,18 @@ without flagging them as impossible. I rejected that and kept the regex rule ins
 - Claude also drafted environment.yml and the pandas one-liners I used to inspect the data.
 - Claude helped draft the clean_fasta_regex.py
 ## Comparison (compare.py)
-- Claude drafted compare.py. I ran it and used its output (output/comparison.csv) for the write-up.
+- Claude drafted compare.py. I edited it, ran it and used its output (output/comparison.csv) for the write-up.
 
 ## Write-up (WRITEUP.md)
 - Claude (Claude Code) checked the repo against the Lab 3 rubric, re-ran both scripts to confirm the
   outputs reproduce, and drafted WRITEUP.md from my NOTES.md findings and the comparison output.
+  - I rewrote it all in my own words to properly reflect what was actually done and what I actually saw, I as well filled in the timing estimated
 
 ## What I checked myself
 - Ran both scripts and confirmed the output (60 rows, 48/60 glucose agreement)
 - Checked the mmol/L values against normal glucose ranges from my clinical work
 - Confirmed the AI output had all 60 rows and no dropped samples
+- Rewrote a lot of the notes and write up.
 
 
 ## Extra credit: FASTA AI cleaning
@@ -72,4 +74,4 @@ without flagging them as impossible. I rejected that and kept the regex rule ins
 
 ## Extra credit scripts and write-up
 - Claude drafted clean_fasta_regex.py, compare_fasta.py, and build_feature_table.py.
-  I ran all three and checked the output against the raw FASTA and my cleaned CSV.
+  I ran all three and checked the output against the raw FASTA and my cleaned CSV. Before running I tested the code and made sure that it wasn't missing anything and filled in the exact file names that I needed it to reference. 
